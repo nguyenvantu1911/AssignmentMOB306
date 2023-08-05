@@ -9,15 +9,18 @@ import {
   StatusBar,
   SafeAreaView,
 } from "react-native";
+import { useNavigation } from '@react-navigation/native';
+
 import React, { useEffect, useState } from "react";
 
-const Login = ({ navigation }) => {
+const Login = () => {
+  const navigation = useNavigation();
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [getPasswordVisible, setPasswordVisible] = useState(false);
   const [Acc, setAcc] = useState();
   
-    fetch('http://10.24.10.65:3000/users')
+    fetch('http://10.24.9.145:3000/users')
       .then(response => response.json())
       .then(data => {
         if (JSON.stringify(data) !== JSON.stringify(Acc)) {
@@ -31,14 +34,14 @@ const Login = ({ navigation }) => {
   const doLogin = () => {
     
   };
-  const Login = () => {
+  const Loginn = () => {
     const user = Acc.find((u) => u.username === username && u.password === password);
     console.log("Kiểm tra", user);
     if(user.username =="admin"){
       navigation.navigate("TabMenuadmin");
     } else
     if (user) {
-      navigation.navigate("TabMenu");
+      navigation.navigate("TabMenu",{ userID: user.id } );
     } else {
       alert("Thông tin đăng nhập không chính xác");
       return;
@@ -102,7 +105,7 @@ const Login = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.loginBtn} onPress={Login}>
+          <TouchableOpacity style={styles.loginBtn} onPress={Loginn}>
             <Text style={{ fontWeight: "bold", color: "gray", fontSize: 18 }}>
               Đăng nhập
             </Text>

@@ -7,7 +7,7 @@ const SignUp = ({navigation}) => {
   const [username, setusername] = useState("");
   const [password, setpassword] = useState("");
   const [checkp, setcheckp] = useState("");
-  fetch('http://10.24.10.65:3000/users')
+  fetch('http://10.24.9.145:3000/users')
     .then(response => response.json())
     .then(data => {
       if (JSON.stringify(data) !== JSON.stringify(Acc)) {
@@ -38,7 +38,7 @@ const SignUp = ({navigation}) => {
     
     console.log(newUser);
     
-      fetch('http://10.24.10.65:3000/users',{
+      fetch('http://10.24.9.145:3000/users',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

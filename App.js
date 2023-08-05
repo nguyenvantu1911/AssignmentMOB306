@@ -2,6 +2,7 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useRoute } from '@react-navigation/native';
 import Home from './Home'
 import Login from './Login';
 import SignUp from './SignUp';
@@ -10,13 +11,17 @@ import Profile from './Profile';
 import { Image } from 'react-native';
 import ChangePass from './ChangePass';
 import Post from './Post';
+import Homea from './Homea';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const TabMenu = () => {
+  const route = useRoute();
+  console.log("Route:", route); // In ra route để kiểm tra
+  const userId = route.params?.userID;
   return (
     
-    <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
+    <Tab.Navigator initialRouteName="Home"  screenOptions={{ headerShown: false }}>
       <Tab.Screen name='Trang chủ' component={Home}
         options={{
           tabBarIcon: () => (
@@ -24,6 +29,7 @@ const TabMenu = () => {
 
           )
         }}
+        initialParams={{ userID: userId }}
       />
       <Tab.Screen name='Follow' component={Follow}
         options={{
@@ -32,6 +38,7 @@ const TabMenu = () => {
 
           )
         }}
+        initialParams={{ userID: userId }}
       />
       <Tab.Screen name='Profile' component={Profile}
         options={{
@@ -40,6 +47,7 @@ const TabMenu = () => {
 
           )
         }}
+        initialParams={{ userID: userId }}
       />
     </Tab.Navigator>
   )
@@ -48,8 +56,8 @@ const TabMenu = () => {
 const TabMenuadmin = () => {
   return (
     
-    <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-      <Tab.Screen name='Trang chủ' component={Home}
+    <Tab.Navigator initialRouteName="Homea" screenOptions={{ headerShown: false }}>
+      <Tab.Screen name='Trang chủ' component={Homea}
         options={{
           tabBarIcon: () => (
             <Image style={{ width: 30, height: 30 }} source={require('./image/homeicon.png')} resizeMode="stretch" />
@@ -89,6 +97,7 @@ const StackNavigator = () => {
       <Stack.Screen name='Profile' component={Profile} />
       <Stack.Screen name='ChangePass' component={ChangePass} />
       <Stack.Screen name='Post' component={Post} />
+      <Stack.Screen name="Homea" component={Homea} />
     </Stack.Navigator>
     </NavigationContainer>
   );
